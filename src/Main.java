@@ -14,7 +14,7 @@ public class Main {
  
 	public static void main(String[] args) throws SQLException, IOException {
 		db.runSql2("TRUNCATE Record;");
-		processPage("http://www.mit.edu");
+		processPage("http://www.srmuniv.ac.in/");
 	}
  
 	public static void processPage(String URL) throws SQLException, IOException{
@@ -31,7 +31,7 @@ public class Main {
 			stmt.execute();
  
 			//get useful information
-			Document doc = Jsoup.connect("http://www.mit.edu/").get();
+			Document doc = Jsoup.connect("http://www.srmuniv.ac.in/").get();
  
 			if(doc.text().contains("research")){
 				System.out.println(URL);
@@ -40,7 +40,7 @@ public class Main {
 			//get all links and recursively call the processPage method
 			Elements questions = doc.select("a[href]");
 			for(Element link: questions){
-				if(link.attr("href").contains("mit.edu"))
+				if(link.attr("href").contains("srmuniv"))
 					processPage(link.attr("abs:href"));
 			}
 		}
